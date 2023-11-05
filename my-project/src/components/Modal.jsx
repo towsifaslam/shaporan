@@ -1,58 +1,58 @@
-import React, { useState } from 'react'
-import{GiCancel}from'react-icons/gi'
-import { useCreateWorkSpaceMutation } from '../features/workspaces/workspaceApi'
-import { useDispatch, useSelector } from 'react-redux'
-export default function Modal({isvisible,onClose}) {
-  const [createWorkSpace,{data,isLoading,isError}] = useCreateWorkSpaceMutation()
-  const dispatch = useDispatch()
-  const auth = useSelector((state)=>state.auth)
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+import { GiCancel } from "react-icons/gi";
+import { useCreateWorkSpaceMutation } from "../features/workspaces/workspaceApi";
+import { useDispatch, useSelector } from "react-redux";
+export default function Modal({ isvisible, onClose }) {
+  const [createWorkSpace, { data, isLoading, isError }] =
+    useCreateWorkSpaceMutation();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   // console.log(auth.user._id)
 
   const [formData, setFormData] = useState({
     name: "",
-    description:"",
-     
+    description: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-   
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-      console.log(formData)
-    
+
+    console.log(formData);
+
     createWorkSpace({
-      name:formData.name,
-      description:formData.description,
-      createdBy:auth.user._id
-    })
-     
-   
-    
-  }
-  if(!isvisible) return null
+      name: formData.name,
+      description: formData.description,
+      createdBy: auth.user._id,
+    });
+  };
+  if (!isvisible) return null;
   return (
-    <div className='fixed inset-0 h-screen  w-full bg-opacity-25  bg-slate-600 backdrop-blur-sm flex justify-center items-center'>
+    <div className="fixed inset-0 h-screen  w-full bg-opacity-25  bg-slate-600 backdrop-blur-sm flex justify-center items-center">
       <div className="flex min-h-full flex-1 flex-col justify-center  px-6 py-12 lg:px-8">
-      <button className=' text-xl flex justify-end' onClick={()=>onClose()}>
-        <GiCancel size={30}/>
-      </button>
-        
+        <button className=" text-xl flex justify-end" onClick={() => onClose()}>
+          <GiCancel size={30} />
+        </button>
+
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Adding Grid Itema
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6"  onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Enter your project Name
               </label>
               <div className="mt-2">
@@ -70,8 +70,11 @@ export default function Modal({isvisible,onClose}) {
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">
-                Ennter your Text
+              <label
+                htmlFor="description"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Enter Your Text
               </label>
               <div className="mt-2">
                 <input
@@ -86,7 +89,7 @@ export default function Modal({isvisible,onClose}) {
                 />
               </div>
             </div>
-         
+
             <div>
               <button
                 type="submit"
@@ -96,10 +99,8 @@ export default function Modal({isvisible,onClose}) {
               </button>
             </div>
           </form>
-
-        
         </div>
       </div>
     </div>
-  )
+  );
 }

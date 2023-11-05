@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 // Cart.js
 
-import React from 'react';
+import React from "react";
 
 const Cart = ({ cart, onRemoveFromCart }) => {
   return (

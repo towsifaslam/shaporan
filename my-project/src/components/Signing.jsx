@@ -4,7 +4,7 @@ import { useLoginMutation } from "../features/auth/authApi";
 
 export default function Signing() {
   const navigate = useNavigate();
-  const [err,setError] = useState('')
+  const [err, setError] = useState("");
 
   const [formData, setFormData] = useState({
     email: "",
@@ -15,29 +15,26 @@ export default function Signing() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const [login, { data, isLoading,error }] = useLoginMutation();
+  const [login, { data, isLoading, error }] = useLoginMutation();
 
-
-  useEffect(()=>{
-   
-    if(error?.data){
-       setError("Please Try Again")
+  useEffect(() => {
+    if (error?.data) {
+      setError("Please Try Again");
     }
-    if(data?.user && data?.token){
-      setError('success')
-      navigate('/')
+    if (data?.user && data?.token) {
+      setError("success");
+      navigate("/");
     }
-    console.log(data)
-  },[data,error,navigate])
+    console.log(data);
+  }, [data, error, navigate]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('')
- 
-    
-      login(formData)
-    
+    setError("");
+
+    console.log("formdata", formData);
+    login(formData);
   };
-   
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -117,7 +114,9 @@ export default function Signing() {
             register
           </Link>
         </p>
-        <div className="text-center text-red-700 text-xl">{error !== '' && err}</div>
+        <div className="text-center text-red-700 text-xl">
+          {error !== "" && err}
+        </div>
       </div>
     </div>
   );
