@@ -5,7 +5,7 @@ import { tagTypeList } from "../../utils/tagTypes";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api",
+    baseUrl: "http://localhost:3001/api",
     prepareHeaders: async (headers, { getState, endpoint }) => {
       const token = getState()?.auth?.token;
       if (token) {
